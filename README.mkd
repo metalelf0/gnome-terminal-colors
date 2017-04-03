@@ -8,8 +8,8 @@ color theme].
 For Mate Terminal, you can use [mate-terminal-colors-solarized], maintained
 by @cledoux.
 
-Colors
-------
+Colors - solarized
+------------------
 
 Only the foreground, background and highlight colors are different in the light
 and dark color sets, as one of the main ideas behind Ethan Schonoovers work is
@@ -22,6 +22,29 @@ applications.
 For the original works of Ethan Schoonover, visit the [Solarized repository].
 The scripts for Gnome Terminal is maintained in [Gnome Terminal Colors
 Solarized repository].
+
+Previews
+--------
+
+[Hemisu][vim-hemisu] dark:
+
+![Hemisu (dark)](/screenshots/hemisu-dark.png?raw=true "Hemisu (dark)")
+
+[Hemisu][vim-hemisu] light:
+
+![Hemisu (light)](/screenshots/hemisu-light.png?raw=true "Hemisu (light)")
+
+[Solarized][Solarized homepage] dark:
+
+![Solarized (dark)](/screenshots/solarized-dark.png?raw=true "Solarized (dark)")
+
+[Solarized][Solarized homepage] dark (alternative):
+
+![Solarized (dark alternative)](/screenshots/solarized-dark-alternative.png?raw=true "Solarized (dark alternative)")
+
+[Solarized][Solarized homepage] light:
+
+![Solarized (light)](/screenshots/solarized-light.png?raw=true "Solarized (light)")
 
 Installation and usage
 ----------------------
@@ -41,11 +64,6 @@ Then clone the repository and you can run the installation script:
     $ ./install.sh
 
 And just follow the instructions.
-
-You can also run the `set_dark.sh` or `set_light.sh` script, to directly set
-the dark or light solarized theme to the actived gnome-terminal profile. The
-options `--install-dircolors` or `--skip-dircolors` can also be used to install
-or not the solarized dircolors in a non-interactive mode.
 
 To run this script remotely or via cron (or from any shell where
 `DBUS_SESSION_BUS_ADDRESS` is not set), you need to start a dbus connection:
@@ -109,11 +127,37 @@ etc.) but could be on ArchLinux, Gentoo and others.
 Contributors
 ------------
 
-* Sigurd Gartmann <sigurdga@sigurdga.no>
-* Anthony Ruhier <anthony.ruhier@gmail.com>
-* Paul Thomson <captbunzo@gmail.com>
-* Techlive Zheng <techlivezheng@gmail.com>
-* Daniel Graña <dangra@gmail.com>
+The original [Gnome Terminal Colors Solarized repository] project:
+  * Sigurd Gartmann <sigurdga@sigurdga.no>
+  * Anthony Ruhier <anthony.ruhier@gmail.com>
+  * Paul Thomson <captbunzo@gmail.com>
+  * Techlive Zheng <techlivezheng@gmail.com>
+  * Daniel Graña <dangra@gmail.com>
+
+ Colorscheme authors
+ -------------------
+ 
+ * [Solarized][Solarized homepage]: Ethan Schoonover
+ * [Gotham][vim-gotham]: Andrea Leopardi 
+ * [Hemisu][vim-hemisu]: Noah Frederick
+ 
+ Solarized
+ ===
+ 
+ Colors
+ ------
+ 
+ Only the foreground, background and highlight colors are different in the light
+ and dark color sets, as one of the main ideas behind Ethan Schonoovers work is
+ to use the same colors in the palette for both.
+ 
+ See the [Solarized homepage] for theory behind the colors, screenshots, details
+ and colorscheme versions for Vim, Mutt, popular terminal emulators and other
+ applications.
+ 
+ For the original works of Ethan Schoonover, visit the [Solarized repository].
+ The scripts for Gnome Terminal is maintained in [Gnome Terminal Colors
+ Solarized repository].
 
 FAQ
 ===
@@ -132,3 +176,5 @@ colors.
 [Solarized repository]: https://github.com/altercation/solarized
 [Gnome Terminal Colors Solarized repository]: https://github.com/sigurdga/gnome-terminal-colors-solarized
 [dircolors solarised color theme]: https://github.com/seebi/dircolors-solarized
+[vim-gotham]: https://github.com/whatyouhide/vim-gotham
+[vim-hemisu]: https://github.com/noahfrederick/vim-hemisu 
