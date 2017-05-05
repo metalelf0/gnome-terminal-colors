@@ -52,7 +52,7 @@ get_profile_name() {
   else
     profile_name=$(gconftool-2 -g $gconfdir/$1/visible_name)
   fi
-  [[ -z $profile_name ]] && die "$1 is not a valid profile" 3
+  [[ -z $profile_name ]] && die "$1 (No name)" 3
   echo $profile_name
 }
 
@@ -60,7 +60,7 @@ interactive_new_profile() {
   local confirmation
 
   echo    "No profile found"
-  echo    "You need to create a new default profile to continue. Continue ?"
+  echo    "You need to create a new default profile to continue. Continue?"
   echo -n "(YES to continue) "
 
   read confirmation

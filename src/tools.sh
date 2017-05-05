@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-gnomeVersion="$(expr "$(gnome-terminal --version)" : '.* \(.*[.].*[.].*\)$')"
+gnomeVersion="$(expr \
+    "$(LANGUAGE=en_US.UTF-8 gnome-terminal --version)" : \
+    '^[^[:digit:]]* \(\([[:digit:]]*\.*\)*\)' \
+)"
 
 # newGnome=1 if the gnome-terminal version >= 3.8
 if [[ ("$(echo "$gnomeVersion" | cut -d"." -f1)" = "3" && \
@@ -23,3 +26,10 @@ in_array() {
   return 1
 }
 
+to_gconf() {
+    tr '\n' \: | sed 's#:$#\n#'
+}
+
+to_dconf() {
+    tr '\n' '~' | sed -e "s#~\$#']\n#" -e "s#~#', '#g" -e "s#^#['#"
+}

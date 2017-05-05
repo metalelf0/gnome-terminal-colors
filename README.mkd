@@ -5,6 +5,9 @@ Scripts for setting various colorschemes with Gnome Terminal. To get nicely
 colored directory listings, you will also need to set up a [dircolors solarised
 color theme].
 
+For Mate Terminal, you can use [mate-terminal-colors-solarized], maintained
+by @cledoux.
+
 Colorschemes
 ------------
 
@@ -15,6 +18,29 @@ Colorschemes
 [Gotham][vim-gotham]:
 
 ![Gotham](/screenshots/gotham.png?raw=true "Gotham")
+
+[Hemisu][vim-hemisu] dark:
+
+![Hemisu (dark)](/screenshots/hemisu-dark.png?raw=true "Hemisu (dark)")
+
+[Hemisu][vim-hemisu] light:
+
+![Hemisu (light)](/screenshots/hemisu-light.png?raw=true "Hemisu (light)")
+
+[Solarized][Solarized homepage] dark:
+
+![Solarized (dark)](/screenshots/solarized-dark.png?raw=true "Solarized (dark)")
+
+[Solarized][Solarized homepage] dark (alternative):
+
+![Solarized (dark alternative)](/screenshots/solarized-dark-alternative.png?raw=true "Solarized (dark alternative)")
+
+[Solarized][Solarized homepage] light:
+
+![Solarized (light)](/screenshots/solarized-light.png?raw=true "Solarized (light)")
+
+Previews
+--------
 
 [Hemisu][vim-hemisu] dark:
 
@@ -47,11 +73,18 @@ this can be installed by running
 
     $ sudo apt-get install dconf-cli
 
-Then you can run the installation script:
+Then clone the repository and you can run the installation script:
 
+    $ git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
+    $ cd gnome-terminal-colors-solarized
     $ ./install.sh
 
 And just follow the instructions.
+
+To run this script remotely or via cron (or from any shell where
+`DBUS_SESSION_BUS_ADDRESS` is not set), you need to start a dbus connection:
+
+    $ dbus-launch ./install.sh
 
 Uninstall
 ---------
@@ -62,6 +95,7 @@ by running:
 ### Gnome 3.6 or lower
 
     $ rm -r ~/.gconf/apps/gnome-terminal/profiles/Solarized/
+    $ gconftool-2 --recursive-unset /apps/gnome-terminal
 
 ### Gnome 3.8 or higher
 
@@ -75,18 +109,36 @@ configuration in gnome-terminal).
 Themes
 ------
 
-Each theme has is own folder in the `colors` dir. It contains 5 files:
+Each theme has is own folder in the `colors` dir. It contains the following
+files:
 
   * bd_color: bold color
   * bg_color: background color
   * fg_color: foreground color
-  * palette_dconf: palette for dconf (for gnome-terminal 3.8 or higher). Each
-    color is surrounded of simple quotes, and colors are comma separated.
-  * palette_gconf: palette for gconf (for gnome-terminal 3.6 or lower). Colors
-    are separated by colons.
+  * palette: list of colors for all standard color codes.
 
 No additional configuration is needed to add a theme, the installation script
 just list at launch the children folders in the `colors` dir.
+
+Dircolors
+---------
+
+The installation script will ask if a solarized dircolors is wanted. It will be
+downloaded and installed as `~/.dir_colors/dircolors`. On CentOS, it can be an
+issue (see issue #62), as the default setup use `~/.dir_colors` as dircolors.
+In that case, you should manually move `~/.dir_colors` as
+`~/.dir_colors/dircolors` before starting the installation script.
+
+If the dircolors is not applied, please check that your shell actually source
+your dircolors:
+```
+if [ -f ~/.dir_colors/dircolors ]
+    then eval `dircolors ~/.dir_colors/dircolors`
+fi
+```
+
+This should not be necessary on major distributions (such as Ubuntu, Fedora,
+etc.) but could be on ArchLinux, Gentoo and others.
 
 Importing iTerm themes
 ----------------------
@@ -97,7 +149,7 @@ script `tools/import_from_iterm.rb`.
 Prerequisites: a working ruby installation with the `nokogiri-plist` ruby gem
 (`gem install nokogiri-plist`).
 
-Example call: 
+Example call:
 
 `tools/import_from_iterm.rb my_iterm_colorscheme.itermcolors my_iterm_colorscheme`
 
@@ -112,11 +164,36 @@ The original [Gnome Terminal Colors Solarized repository] project:
 * Techlive Zheng <techlivezheng@gmail.com>
 * Daniel Graña <dangra@gmail.com>
 
+ Colorscheme authors
+ -------------------
+
+ * [Solarized][Solarized homepage]: Ethan Schoonover
+ * [Gotham][vim-gotham]: Andrea Leopardi
+ * [Hemisu][vim-hemisu]: Noah Frederick
+
+ Solarized
+ ===
+
+ Colors
+ ------
+
+ Only the foreground, background and highlight colors are different in the light
+ and dark color sets, as one of the main ideas behind Ethan Schonoovers work is
+ to use the same colors in the palette for both.
+
+ See the [Solarized homepage] for theory behind the colors, screenshots, details
+ and colorscheme versions for Vim, Mutt, popular terminal emulators and other
+ applications.
+
+ For the original works of Ethan Schoonover, visit the [Solarized repository].
+ The scripts for Gnome Terminal is maintained in [Gnome Terminal Colors
+ Solarized repository].
+
 Colorscheme authors
 -------------------
 
 * [Solarized][Solarized homepage]: Ethan Schoonover
-* [Gotham][vim-gotham]: Andrea Leopardi 
+* [Gotham][vim-gotham]: Andrea Leopardi
 * [Hemisu][vim-hemisu]: Noah Frederick
 * [Dracula][dracula]: Zeno Rocha
 
@@ -149,25 +226,13 @@ colors.
 
     set t_Co=16
 
-Mate terminal compatibility
----------------------------
 
-This script has to stay simple, and including Mate compatibility is not what I
-want, even if there is not a lot of changes between Mate-Terminal and
-Gnome-Terminal. Moreover, I do not use Mate so I would only test the script
-quickly in a virtual machine, and it is not the main platform target.
-
-However, I invite anybody to fork this script and to include the modifications
-for Mate (michel-slm already did the job in the pull-request #39, many thanks
-to him !). If it is maintained (like pulling the new commits from this repo
-and following the Mate Terminal changes), I will quote the forked repo in this
-readme.
-
+[mate-terminal-colors-solarized]: https://github.com/cledoux/mate-terminal-colors-solarized
 [Solarized homepage]:   http://ethanschoonover.com/solarized
 [Solarized repository]: https://github.com/altercation/solarized
 [Gnome Terminal Colors Solarized repository]: https://github.com/sigurdga/gnome-terminal-colors-solarized
 [dircolors solarised color theme]: https://github.com/seebi/dircolors-solarized
 [Gotham]
 [vim-gotham]: https://github.com/whatyouhide/vim-gotham
-[vim-hemisu]: https://github.com/noahfrederick/vim-hemisu 
+[vim-hemisu]: https://github.com/noahfrederick/vim-hemisu
 [dracula]:    https://github.com/zenorocha/dracula-theme
